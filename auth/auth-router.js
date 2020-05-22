@@ -19,12 +19,14 @@ router.get('/', (req, res) => {
 
 router.post('/register', (req, res) => {
   let user = req.body;
+  console.log(req.body)
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
 
   Users.add(user)
     .then(added => {
       res.status(201).json(added);
+      // res.status(201).json({ message: 'messagehere', username: user.username })
     })
     .catch(err => {
       console.log(err);
